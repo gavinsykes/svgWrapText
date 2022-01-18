@@ -1,0 +1,28 @@
+{
+  "author": {
+    "name": "Gavin Sykes",
+    "email": "gavin@gavinsykes.uk",
+    "url": "https://gavinsykes.uk"
+  },
+  "bugs": {
+    "url": "https://github.com/gavinsykes/svgWrapText/issues"
+  },
+  "description": "A mini-package to quickly and easily wrap an SVG text element into a given width",
+  "homepage": "https://github.com/gavinsykes/svgWrapText#readme",
+  "keywords": [
+    "svg",
+    "text",
+    "wrap"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "name": "svg-wrap-text",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gavinsykes/svgWrapText.git"
+  },
+  "scripts": {
+    "test": "npm run test"
+  },
+  "version": "0.0.1"
+}
