@@ -8,6 +8,24 @@
     "url": "https://github.com/gavinsykes/svgWrapText/issues"
   },
   "description": "A mini-package to quickly and easily wrap an SVG text element into a given width",
+  "devDependencies": {
+    "@types/node": "^17.0.10",
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
+    "alex": "^10.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "eslint-plugin-standard": "^5.0.0",
+    "prettier": "^2.5.1",
+    "shx": "^0.3.4",
+    "ts-loader": "^9.2.6",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
+  },
   "homepage": "https://github.com/gavinsykes/svgWrapText#readme",
   "keywords": [
     "svg",
@@ -22,7 +40,25 @@
     "url": "git+https://github.com/gavinsykes/svgWrapText.git"
   },
   "scripts": {
-    "test": "npm run test"
+    "build": "webpack --config webpack.prod.js",
+    "build:dev": "webpack --config webpack.dev.js",
+    "ci": "npm run build && npm run test:cover",
+    "clean": "shx rm -rf coverage dist docs .nyc_output",
+    "clean-slate-protocol-sir": "shx rm -rf coverage dist docs node_modules .nyc_output",
+    "docs": "typedoc --theme minimal --out ./docs --mode modules --tsconfig ./tsconfig.json ./dev/src",
+    "lint": "npx eslint ./dev/**/*",
+    "lint:fix": "npx eslint ./dev/**/* --fix",
+    "lint:prettier": "npm run lint && npm run prettier",
+    "postversion": "git push origin master && git push origin master --tags && npm publish",
+    "prettier": "npx prettier --config .prettierrc ./dev/**/*.ts --write",
+    "preversion": "npm run build && npm run test:prettier && npm run docs && git add docs && git commit -m\"Bumping version and updating docs\"",
+    "setup": "npm install",
+    "test": "mocha -r ts-node/register dev/**/*.spec.ts && alex && npm run lint",
+    "test:codecov": "npm run test:cover && bash <(curl -s https://codecov.io/bash)",
+    "test:cover": "nyc --reporter=text --reporter=text-lcov --reporter=html --reporter=json mocha -r ts-node/register dev/**/*.spec.ts",
+    "test:prettier": "npm run prettier && npm run test",
+    "update": "npm update",
+    "update:major": "npx npm-check-updates -u && npm install"
   },
   "version": "0.0.1"
 }
